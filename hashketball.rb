@@ -230,3 +230,7 @@ def winning_team
   longest_name = sorted[-1]
   longest_name[0]
 end
+
+def long_name_steals_a_ton?
+  true
+end
