@@ -206,3 +206,27 @@ def winning_team
       home
     end
   end
+  
+  def player_with_longest_name
+  x = game_hash
+  y = x[:home][:players]
+  z = x[:away][:players]
+  array_names = y.concat(z)
+  player_names = []
+
+  array_names.each do |key|
+    key.each do |k, v|
+      player_names << key.key(v)
+    end
+  end
+
+  char_count = {}
+
+  player_names.each do |name|
+    char_count[name] = name.size
+  end
+
+  sorted = char_count.sort_by {|k, v| v}
+  longest_name = sorted[-1]
+  longest_name[0]
+end
