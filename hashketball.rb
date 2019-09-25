@@ -175,3 +175,34 @@ def most_points_scored
   end
   hottest_player
 end
+
+def winning_team
+  x = game_hash
+  y = x[:home][:players]
+  z = x[:away][:players]
+  home_numbers = []
+  away_numbers = []
+
+  y.each do |name|
+    name.each do |k, v|
+      home_numbers << v[:points]
+    end
+  end
+  z.each do |name|
+    name.each do |k, v|
+      away_numbers << v[:points]
+    end
+  end
+
+  total_home_numbers = home_numbers.sum
+  total_away_numbers = away_numbers.sum
+
+  home = x[:home][:team_name]
+  away = x[:away][:team_name]
+
+  if total_away_numbers > total_home_numbers
+    away
+    elsif total_home_numbers > total_away_numbers
+      home
+    end
+  end
