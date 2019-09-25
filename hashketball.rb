@@ -83,33 +83,68 @@ end
 
 def player_numbers(team_name)
   x = game_hash
-  
+  y = x[:home][:players]
+  z = x[:away][:players]
+  home_numbers = []
+  home_numbers.sort!
+  away_numbers = []
+  away_numbers.sort!
+
+  y.each do |name|
+    name.each do |k, v|
+      home_numbers << v[:number]
+    end
+  end
+  z.each do |name|
+    name.each do |k, v|
+      away_numbers << v[:number]
+    end
+  end
+  if x[:home][:team_name] == team_name
+    home_numbers
+  elsif x[:away][:team_name] == team_name
+    away_numbers
+  end
 end
 
-def player_stats
+def player_stats (name)
+  x = game_hash
+  y = x[:home][:players]
+  z = x[:away][:players]
+  array_names = y.concat(z)
 
+  array_names.each do |key|
+    key.each do |player_name, info|
+      if player_name == name
+        return info
+      end
+    end
+  end
 end
 
 def big_shoe_rebounds
+  x = game_hash
+  y = x[:home][:players]
+  z = x[:away][:players]
+  array_names = y.concat(z)
+  shoes_array = []
 
-end
+  array_names.each do |key|
+    key.each do |k, v|
+      shoes_array << v[:shoe]
+      end
+  end
+  
+  shoes_array.sort!
+  biggest_shoes = shoes_array[-1]
+  rebounds = ''
 
-# bonus questions
-
-def most_points_scored
-
-end
-
-def winning_team
-
-end
-
-def player_with_longest_name
-
-end
-
-# super bonus question
-
-def long_name_steals_a_ton?
-
+  array_names.each do |key|
+    key.each do |k, v|
+      if v[:shoe] == biggest_shoes
+        rebounds = v[:rebounds]
+      end
+    end
+  end
+  rebounds
 end
