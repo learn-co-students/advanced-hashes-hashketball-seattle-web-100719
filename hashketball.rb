@@ -148,3 +148,30 @@ def big_shoe_rebounds
   end
   rebounds
 end
+
+def most_points_scored
+  x = game_hash
+  y = x[:home][:players]
+  z = x[:away][:players]
+  array_names = y.concat(z)
+  points = []
+
+  array_names.each do |key|
+    key.each do |k, v|
+      points << v[:points]
+    end
+  end
+
+  points.sort!
+  most_points = points[-1]
+  hottest_player = ''
+
+  array_names.each do |key|
+    key.each do |k, v|
+      if v[:points] == most_points
+        hottest_player = key.key(v)
+      end
+    end
+  end
+  hottest_player
+end
